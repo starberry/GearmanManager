@@ -853,6 +853,10 @@ abstract class GearmanManager {
             $worker_list = array($worker);
         }
 
+        if ($this->log_file) {
+            $this->open_log_file($this->log_file);
+        }
+
         $pid = pcntl_fork();
 
         switch($pid) {
