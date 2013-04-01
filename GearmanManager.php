@@ -534,7 +534,7 @@ abstract class GearmanManager {
          * Debug option to dump the config and exit
          */
         if(isset($opts["Z"])){
-            print_r($this->config);
+            var_export($this->config);
             exit();
         }
 
@@ -551,7 +551,7 @@ abstract class GearmanManager {
         if ($this->log_file_handle) {
             @fclose($this->log_file_handle);
         }
-        $this->log_file_handle = @fopen($file, "a");
+        $this->log_file_handle = @fopen($file.'.'.strftime("%Y-%m-%d"), "a");
         if(!$this->log_file_handle){
             $this->show_help("Could not open log file $file");
         }
@@ -1102,7 +1102,7 @@ abstract class GearmanManager {
         echo "  -D NUMBER      Start NUMBER workers that do all jobs\n";
         echo "  -h HOST[:PORT] Connect to HOST and optional PORT\n";
         echo "  -H             Shows this help\n";
-        echo "  -l LOG_FILE    Log output to LOG_FILE or use keyword 'syslog' for syslog support\n";
+        echo "  -l LOG_PREFIX  Log output to LOG_PREFIX or use keyword 'syslog' for syslog support\n";
         echo "  -p PREFIX      Optional prefix for functions/classes of PECL workers. PEAR requires a constant be defined in code.\n";
         echo "  -P PID_FILE    File to write process ID out to\n";
         echo "  -u USERNAME    Run wokers as USERNAME\n";
@@ -1116,5 +1116,3 @@ abstract class GearmanManager {
     }
 
 }
-
-?>
